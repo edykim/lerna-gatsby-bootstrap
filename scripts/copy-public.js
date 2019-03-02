@@ -61,7 +61,7 @@ lernaConfig.packages.forEach(packagePath => {
       }
 
       const { pathPrefix } = require(`./../${file}`);
-      const targetDir = `${publicDirName}${pathPrefix || ""}`;
+      const targetDir = path.join(publicDirName, pathPrefix || "");
 
       if (_targetDirPackages[targetDir]) {
         console.log(
