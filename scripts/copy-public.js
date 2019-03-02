@@ -23,6 +23,7 @@ const lernaConfig = require("../lerna.json");
 
 const publicDirName = process.env.PUBLIC_DIR || `public`;
 const configFileName = `gatsby-config.js`;
+const _targetDirPackages = {};
 
 const specificPackageNames = process.argv.slice(2);
 
@@ -61,6 +62,19 @@ lernaConfig.packages.forEach(packagePath => {
 
       const { pathPrefix } = require(`./../${file}`);
       const targetDir = `${publicDirName}${pathPrefix || ""}`;
+
+      if (_targetDirPackages[targetDir]) {
+        console.log(
+          `Unable to copy from "${
+            package.name
+          }. The path "${targetDir}" already uses by "${
+            _targetDirPackages[targetDir]
+          }" package.\n - Check \`pathPrefix\` for avoiding this issue. https://www.gatsbyjs.org/docs/path-prefix/`
+        );
+        return;
+      }
+
+      _targetDirPackages[targetDir] = package.name;
 
       copyfiles(
         [`${dir}/${publicDirName}/**/*`, targetDir],
