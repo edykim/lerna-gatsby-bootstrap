@@ -1,8 +1,8 @@
-# Lerna Gatsby starter
+# Lerna bootstrap for Gatsby
 
 > Put All Your Eggs In One Basket.
 
-This starter ships with basic lerna configuration for multiple Gatsby websites.
+This bootstrap ships with basic lerna configuration for multiple Gatsby websites.
 
 ## Quick start
 
