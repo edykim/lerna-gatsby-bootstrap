@@ -1,5 +1,5 @@
 {
-  "name": "lerna-gatsby-starter",
+  "name": "lerna-gatsby-bootstrap",
   "private": true,
   "scripts": {
     "lerna": "lerna",

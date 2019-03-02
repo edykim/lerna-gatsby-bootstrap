@@ -9,7 +9,7 @@ This bootstrap ships with basic lerna configuration for multiple Gatsby websites
 1. **Create a main codebase via cloning this repository.**
 
    ```sh
-   git clone https://github.com/edykim/lerna-gatsby-starter.git <YOUR_PROJECT> && cd <YOUR_PROJECT>
+   git clone https://github.com/edykim/lerna-gatsby-bootstrap.git <YOUR_PROJECT> && cd <YOUR_PROJECT>
    # Then, update the package name in `package.json`
    ```
 
