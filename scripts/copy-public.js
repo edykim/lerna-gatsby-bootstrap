@@ -1,0 +1,81 @@
+/**
+ * Copy public directories to root directory from packages
+ *
+ * Find all Gatsby package from packages directory, copy the `public`
+ * directory to `public` directory in root package. The script awares
+ * `pathPrefix` in `gatsby-config.js`, so it copies sub directory if the
+ * package contains the `pathPrefix` option.
+ *
+ * The script can run specific package only via arguments.
+ *
+ *   $ node copy-public.js @edykim/hello @edykim/world
+ *
+ * or
+ *
+ *   $ npm run copy-public -- @edykim/hello @edykim/world
+ *
+ */
+const fs = require("fs");
+const glob = require("glob");
+const path = require("path");
+const copyfiles = require("copyfiles");
+const lernaConfig = require("../lerna.json");
+
+const publicDirName = process.env.PUBLIC_DIR || `public`;
+const configFileName = `gatsby-config.js`;
+
+const specificPackageNames = process.argv.slice(2);
+
+if (specificPackageNames.length > 0) {
+  console.log(`Copy '${publicDirName}' from packages below:`);
+  console.log(specificPackageNames.map(name => `- ${name}`).join("\n"));
+  console.log(``);
+} else {
+  console.log(`Copy '${publicDirName}' from all packages.`);
+  console.log(``);
+}
+
+lernaConfig.packages.forEach(packagePath => {
+  glob(`${packagePath}/package.json`, {}, (err, files) => {
+    if (err) {
+      throw new Error(err);
+    }
+
+    files.forEach(packageFile => {
+      const package = require(`./../${packageFile}`);
+
+      if (
+        specificPackageNames.length > 0 &&
+        !specificPackageNames.includes(package.name)
+      ) {
+        return;
+      }
+
+      const dir = path.dirname(packageFile);
+      const file = path.join(dir, configFileName);
+
+      // if config file does not exists, skip.
+      if (!fs.existsSync(file)) {
+        return;
+      }
+
+      const { pathPrefix } = require(`./../${file}`);
+      const targetDir = `${publicDirName}${pathPrefix || ""}`;
+
+      copyfiles(
+        [`${dir}/${publicDirName}/**/*`, targetDir],
+        {
+          up: file.split("/").length,
+          all: true
+        },
+        err => {
+          if (err) {
+            throw new Error(err);
+          }
+
+          console.log(`Files copied to ${targetDir} from ${package.name}`);
+        }
+      );
+    });
+  });
+});

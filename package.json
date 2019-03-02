@@ -1,0 +1,16 @@
+{
+  "name": "lerna-gatsby-starter",
+  "private": true,
+  "scripts": {
+    "lerna": "lerna",
+    "bootstrap": "lerna bootstrap",
+    "build-packages": "lerna run build",
+    "copy-public": "node scripts/copy-public.js",
+    "build": "npm run build-packages && npm run copy-public"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.1.0",
+    "glob": "^7.1.3",
+    "lerna": "^3.13.1"
+  }
+}
