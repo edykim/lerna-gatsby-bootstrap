@@ -67,7 +67,7 @@ lernaConfig.packages.forEach(packagePath => {
         console.log(
           `Unable to copy from "${
             package.name
-          }. The path "${targetDir}" already uses by "${
+          }". The path "${targetDir}" already uses by "${
             _targetDirPackages[targetDir]
           }" package.\n - Check \`pathPrefix\` for avoiding this issue. https://www.gatsbyjs.org/docs/path-prefix/`
         );
