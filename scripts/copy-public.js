@@ -91,5 +91,11 @@ lernaConfig.packages.forEach(packagePath => {
         }
       );
     });
+
+    if (!_targetDirPackages[publicDirName]) {
+      console.warn(
+        `Warning: Cannot find any packages for the path "${publicDirName}".`
+      );
+    }
   });
 });
