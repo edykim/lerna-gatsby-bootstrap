@@ -10,6 +10,7 @@ This bootstrap ships with basic lerna configuration for multiple Gatsby websites
 
    ```sh
    git clone https://github.com/edykim/lerna-gatsby-bootstrap.git <YOUR_PROJECT> && cd <YOUR_PROJECT>
+   npm install
    
    # Then, update the package name in `package.json`
    ```
