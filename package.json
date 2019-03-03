@@ -4,6 +4,7 @@
   "scripts": {
     "lerna": "lerna",
     "bootstrap": "lerna bootstrap",
+    "prepare": "npm run bootstrap",
     "build-packages": "lerna run build",
     "copy-public": "node scripts/copy-public.js",
     "build": "npm run build-packages && npm run copy-public"
