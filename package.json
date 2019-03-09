@@ -6,11 +6,12 @@
     "bootstrap": "lerna bootstrap",
     "prepare": "npm run bootstrap",
     "build-packages": "lerna run build",
-    "copy-public": "node scripts/copy-public.js",
-    "build": "npm run build-packages && npm run copy-public"
+    "post-build": "node ./scripts/post-build.js",
+    "build": "npm run build-packages",
+    "netlify:build": "npm run prepare && npm run build && npm run post-build"
   },
   "devDependencies": {
-    "copyfiles": "^2.1.0",
+    "fs-extra": "^7.0.1",
     "glob": "^7.1.3",
     "lerna": "^3.13.1"
   }
